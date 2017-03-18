@@ -1,5 +1,3 @@
-package de.novatec.quickcheck.coinchanger;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -24,6 +22,7 @@ public class CoinChangerTest {
 
     @Property
     public void sumOfCoinsEqualsAmount(@InRange(min = "0", max = "500") int amountToChange) {
+        System.out.println("Generated amountToChange for sumOfCoinsEqualsAmount: " + amountToChange);
         List<Integer> coins = cut.change(amountToChange);
 
         int sum = coins.stream().mapToInt(i -> i).sum();
@@ -32,6 +31,7 @@ public class CoinChangerTest {
 
     @Property
     public void coinsAreOrderedByDescendingValue(@InRange(min = "0", max = "500") int amountToChange) {
+        System.out.println("Generated amountToChange for coinsAreOrderedByDescendingValue: " + amountToChange);
         List<Integer> coins = cut.change(amountToChange);
 
         assertThat(coins).isSortedAccordingTo((o1, o2) -> o2.compareTo(o1));
@@ -39,6 +39,7 @@ public class CoinChangerTest {
 
     @Property
     public void numberOfCoinsIsMinimal(@InRange(min = "0", max = "500") int amountToChange) {
+        System.out.println("Generated amountToChange for numberOfCoinsIsMinimal: " + amountToChange);
         List<Integer> coins = cut.change(amountToChange);
 
         for (Integer coinValue : CoinChanger.COIN_VALUES_IN_CENT) {
